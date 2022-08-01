@@ -1,25 +1,25 @@
-import './App.css';
+import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
-import RecipeTile from './RecipeTile';
-
+import RecipeTile from "./RecipeTile";
 
 function App() {
   const [query, setquery] = useState("");
   const [recipes, setrecipes] = useState([]);
-  const [healthLabels, sethealthLabels] =useState("vegan"); 
+  const [healthLabels, sethealthLabels] = useState("vegan");
+  const [ingredients, setingredients] = useState("");
 
-  // const YOUR_APP_KEY = "19b8e685932721792cc061fe6bed8858"; 
+
+  // const YOUR_APP_KEY = "19b8e685932721792cc061fe6bed8858";
 
   // const YOUR_APP_ID = "29c94a5f";
 
-  const url= `https://api.edamam.com/api/recipes/v2?type=public&q=health=${healthLabels}&app_id=29c94a5f&app_key=19b8e685932721792cc061fe6bed8858`;
-  
-  async function getRecipe(){
+  async function getRecipe() {
+    const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&health=${healthLabels}&app_id=29c94a5f&app_key=19b8e685932721792cc061fe6bed8858`;
     var result = await Axios.get(url);
     setrecipes(result.data.hits);
     console.log(result.data);
-  };
+  }
   const onSubmit = (e) => {
     e.preventDefault();
     getRecipe();
@@ -33,62 +33,41 @@ function App() {
           type="text"
           className="app_input"
           placeholder="enter ingridient"
-          autoComplete= "off"
+          autoComplete="off"
           value={query}
-          onChange={(e) =>  setquery(e.target.value)}
+          onChange={(e) => setquery(e.target.value)}
         />
-        
-      <input className="app_submit" type="submit" 
-      value="Search" />
 
-       <select className="app_healthLabels">
+        <select
+          className="app_healthLabels"
+          value={healthLabels}
+          onChange={(e) => sethealthLabels(e.target.value)}
+        >
+          <option value="vegan">Vegan</option>
 
-        <option onClick={() => sethealthLabels("vegan")}
-        >Vegan</option>
+          <option value="vegetarian">Vegetarian</option>
 
-          <option 
-          onClick={() => sethealthLabels("vegetarian")}
-          >Vegetarian</option>
-         
-          <option
-          onClick={()=> sethealthLabels("low-fat")}
-         >low-fat</option>
-          
-          <option
-          onClick={()=> sethealthLabels("dairy-free")}
-         >dairy-free</option> 
+          <option value="No-oil-added">No-oil added</option>
 
-          <option
-          onClick={()=> sethealthLabels("gluten-free")}
-         >gluten-free</option>
+          <option value="dairy-free">dairy-free</option>
 
-          <option
-          onClick={()=> sethealthLabels("keto-friendly")}
-         >keto-friendly</option> 
+          <option value="gluten-free">gluten-free</option>
 
-          <option
-          onClick={()=> sethealthLabels("paleo")}
-         >paleo</option> 
+          <option value="keto-friendly">keto-friendly</option>
 
-          <option
-          onClick={()=> sethealthLabels("low-sugar")}
-         >low-sugar</option>
+          <option value="paleo">paleo</option>
 
-          <option
-          onClick={()=> sethealthLabels("peanut-free")}
-         >paenut-free </option> 
-         <option
-          onClick={()=> sethealthLabels("soy-free")}
-         >soy-free</option>
-          </select>
+          <option value="low-sugar">low-sugar</option>
 
-        
+          <option value="peanut-free">paenut-free</option>
+          <option value="soy-free">soy-free</option>
+        </select>
+        <input className="app_submit" type="submit" value="Search" />
       </form>
 
       <div className="app_recipes">
-        
-       {recipes.map((recipe) => {
-          return <RecipeTile recipe={recipe} />;
+        {recipes.map((recipe, idx) => {
+          return <RecipeTile key={idx} recipe={recipe} />;
         })}
       </div>
     </div>

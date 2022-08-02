@@ -6,6 +6,7 @@ export default function RecipeTile({ recipe }) {
     if (recipe.recipe.image.match(/\.(jpeg|jpg|gif|png)/) != null) {
       return recipe.recipe.image;
     }
+    
     return "https://via.placeholder.com/200x200.png?text=Recipe%20Photo%20Not%20Found";
   }, [recipe]);
 

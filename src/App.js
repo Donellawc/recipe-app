@@ -5,9 +5,11 @@ import RecipeTile from "./RecipeTile";
 
 function App() {
   const [query, setquery] = useState("");
-  const [recipes, setrecipes] = useState([]);
-  const [healthLabels, sethealthLabels] = useState("vegan");
-  const [ingredients, setingredients] = useState("");
+  const [recipes, setRecipes] = useState([]);
+  const [healthLabels, setHealthLabels] = useState("vegan");
+  // const [search,setSearch ] = useState("");
+
+
 
 
   // const YOUR_APP_KEY = "19b8e685932721792cc061fe6bed8858";
@@ -17,9 +19,10 @@ function App() {
   async function getRecipe() {
     const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&health=${healthLabels}&app_id=29c94a5f&app_key=19b8e685932721792cc061fe6bed8858`;
     var result = await Axios.get(url);
-    setrecipes(result.data.hits);
+    setRecipes(result.data.hits);
     console.log(result.data);
   }
+
   const onSubmit = (e) => {
     e.preventDefault();
     getRecipe();
@@ -32,7 +35,7 @@ function App() {
         <input
           type="text"
           className="app_input"
-          placeholder="enter ingridient"
+          placeholder="enter ingredient"
           autoComplete="off"
           value={query}
           onChange={(e) => setquery(e.target.value)}
@@ -41,7 +44,7 @@ function App() {
         <select
           className="app_healthLabels"
           value={healthLabels}
-          onChange={(e) => sethealthLabels(e.target.value)}
+          onChange={(e) => setHealthLabels(e.target.value)}
         >
           <option value="vegan">Vegan</option>
 
@@ -67,7 +70,7 @@ function App() {
 
       <div className="app_recipes">
         {recipes.map((recipe, idx) => {
-          return <RecipeTile key={idx} recipe={recipe} />;
+          return <RecipeTile key={idx} recipe={recipe}/>;
         })}
       </div>
     </div>

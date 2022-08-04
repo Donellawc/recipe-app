@@ -15,8 +15,11 @@ export default function RecipeTile({ recipe }) {
       <img className="recipeTile_img" src={imageUrl} />
 
       <p className="recipeTile_name">{recipe.recipe.label}</p>
-      <p className="ingredients">{recipe.recipe.ingredients}</p>
-    
+      <ul>
+        {recipe.recipe.ingredientLines.map((val, idx) => (
+          <li key={idx}>{val}</li>
+        ))}
+      </ul>
     
     </div>
   );

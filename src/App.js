@@ -1,26 +1,24 @@
 import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
-import RecipeTile from "./RecipeTile";
+import RecipeTile from "./RecipeTile"
 
 function App() {
   const [query, setquery] = useState("");
-  const [recipes, setRecipes] = useState([]);
-  const [healthLabels, setHealthLabels] = useState("vegan");
+  const [recipe, setRecipes] = useState([]);
+  const [healthLabels, setHealthLabels] = useState("");
   // const [search,setSearch ] = useState("");
+  // const [ingredients, setIngredients] = useState();
 
+  const APP_KEY = "19b8e685932721792cc061fe6bed8858";
 
-
-
-  // const YOUR_APP_KEY = "19b8e685932721792cc061fe6bed8858";
-
-  // const YOUR_APP_ID = "29c94a5f";
+   const APP_ID = "29c94a5f";
 
   async function getRecipe() {
-    const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&health=${healthLabels}&app_id=29c94a5f&app_key=19b8e685932721792cc061fe6bed8858`;
+    const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&health=${healthLabels}&app_id=${APP_ID}&app_key=${APP_KEY}`;
     var result = await Axios.get(url);
     setRecipes(result.data.hits);
-    console.log(result.data);
+    // console.log(result.data);
   }
 
   const onSubmit = (e) => {
@@ -69,9 +67,10 @@ function App() {
       </form>
 
       <div className="app_recipes">
-        {recipes.map((recipe, idx) => {
-          return <RecipeTile key={idx} recipe={recipe}/>;
-        })}
+      {recipe.map((recipe, setIngredients, idx) => {
+        return <RecipeTile key={idx} recipe={recipe}/>; 
+      })}
+     
       </div>
     </div>
   );

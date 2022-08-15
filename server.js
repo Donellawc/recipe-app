@@ -4,13 +4,17 @@ const express = require("express");
 const app = express();
 
 //! declaring the port the server will run on
-const PORT = process.env.PORT ?? 3001;
+const PORT = process.env.PORT ?? 8080;
 
+app.enable("trust proxy");
+app.use((req, res, next) => {
+  req.secure ? next() : res.redirect("https://" + req.headers.host + req.url);
+});
 //! needed to handle JSON data being sent via POST/PUT/PATCH
-app.use(express.json());
+// app.use(express.json());
 
-app.use(cookieParser());
-app.use(passport.initialize());
+// app.use(cookieParser());
+// app.use(passport.initialize());
 //! Allowing static files like .html, .css etc to be given from the backend to the frontend
 app.use(express.static(__dirname + "/build"));
 

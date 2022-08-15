@@ -7,7 +7,7 @@ import RecipeTile from "./RecipeTile"
 function App() {
   const [query, setquery] = useState("");
   const [recipe, setRecipes] = useState([]);
-  const [healthLabels, setHealthLabels] = useState("");
+  const [healthLabels, setHealthLabels] = useState("DASH");
   // const [search,setSearch ] = useState("");
   // const [ingredients, setIngredients] = useState();
 

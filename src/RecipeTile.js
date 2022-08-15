@@ -11,7 +11,11 @@ export default function RecipeTile({ recipe }) {
   }, [recipe]);
 
   return (
-    <div className="recipeTile">
+    <div className="recipeTile" onClick={
+      () => {
+        window.open(recipe["recipe"]["url"]);
+      }}
+      >
       <img className="recipeTile_img" src={imageUrl} />
 
       <p className="recipeTile_name">{recipe.recipe.label}</p>

@@ -42,7 +42,8 @@
 .app_recipes {
   margin-top: 24px;
   display: grid;
-  grid-template-columns: 175px 175px 175px 175px;
+  grid-template-columns: 230px 230px ;
+  border: #02aff0;
   outline-width: 2px;
   align-items: baseline;
 }

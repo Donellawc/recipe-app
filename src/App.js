@@ -1,7 +1,8 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
 import RecipeTile from "./RecipeTile"
+
 
 function App() {
   const [query, setquery] = useState("");
@@ -44,7 +45,8 @@ function App() {
           value={healthLabels}
           onChange={(e) => setHealthLabels(e.target.value)}
         >
-          <option value="vegan">Vegan</option>
+         
+          <option value="DASH">low-sodium</option>
 
           <option value="vegetarian">Vegetarian</option>
 
@@ -67,7 +69,7 @@ function App() {
       </form>
 
       <div className="app_recipes">
-      {recipe.map((recipe, setIngredients, idx) => {
+      {recipe.map((recipe, idx) => {
         return <RecipeTile key={idx} recipe={recipe}/>; 
       })}
      
